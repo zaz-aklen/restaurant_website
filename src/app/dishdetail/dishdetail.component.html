@@ -2,7 +2,7 @@
 fxLayout="row"
 fxLayout.xs="column"
 fxlayout.sm="column"
-fxLayoutAlign.gt-md="space-around "
+fxLayoutAlign.gt-md="space-around center"
 fxLayoutGap="10px" 
 fxLayoutGap.xs="0">
 <div fxFlex="40" *ngIf="dish">
@@ -20,12 +20,8 @@ fxLayoutGap.xs="0">
     </mat-card>
   </div>
   <div fxFlex="40">
-      <mat-card><mat-card-header>
-            <mat-card-title><h1>Comments</h1></mat-card-title>
-      </mat-card-header>
-      </mat-card>
       <mat-list *ngIf="dish">
-          
+          <h1>Comments</h1>
           <mat-list-item *ngFor="let Dish of dish.comments">
               <p>
                   <span mat-line>{{Dish.comment}}</span>
