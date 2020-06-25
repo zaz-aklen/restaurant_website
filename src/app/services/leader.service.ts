@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import {Leader} from '../shared/Leader';
-import {LEADERS} from '../shared/Leaders'
+import {LEADERS} from '../shared/Leaders';
+import {Observable,of} from 'rxjs';
+import {delay} from 'rxjs/Operators';
 @Injectable({
   providedIn: 'root'
 })
 export class LeaderService {
 
   constructor() { }
-  getLeader():Promise<Leader[]>{
-    return new Promise(resolve =>{setTimeout(()=>resolve(LEADERS),2000)});
+  getLeader():Observable<Leader[]>{
+    return of(LEADERS).pipe(delay(2000));
   }
-  getFeaturedleader():Promise<Leader>{
-    return new Promise(resolve =>{setTimeout(()=>resolve(LEADERS.filter((lead) => (lead.featured===true))[0]),2000)});
+  getFeaturedleader():Observable<Leader>{
+    return of(LEADERS.filter((lead) => (lead.featured===true))[0]).pipe(delay(2000));
   }
 }
