@@ -17,15 +17,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import{HttpClientModule} from '@angular/common/http';
 import {MatSliderModule} from '@angular/material/slider';
 
-import { DishdetailComponent } from './dishdetail/dishdetail.component';
 import {DishService} from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import {ProcessHTTPMsgService} from './services/process-httpmsg.service';
 
 import 'hammerjs';
-
+import{baseURL} from './shared/baseurl';
+import { DishdetailComponent } from './dishdetail/dishdetail.component';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { HeaderComponent } from './header/header.component';
@@ -51,6 +53,7 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     MatToolbarModule,
     FlexLayoutModule,
     FormsModule,
@@ -70,7 +73,10 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [DishService,
               PromotionService,
-            LeaderService],
+            LeaderService,
+            ProcessHTTPMsgService,
+            {provide: 'BaseURL', useValue: baseURL}
+          ],
   entryComponents: [
               LoginComponent    
               ],
