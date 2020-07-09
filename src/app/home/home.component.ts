@@ -5,7 +5,6 @@ import { Promotion } from '../shared/promotion';
 import { PromotionService } from '../services/promotion.service';
 import {Leader} from '../shared/Leader';
 import {LeaderService} from '../services/leader.service';
-import { baseURL } from '../shared/baseurl';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +17,8 @@ export class HomeComponent implements OnInit {
   leader:Leader;
   public BaseURL;
   dishErrMsg :string;
+  proErrMsg :string;
+  leadErrMsg :string;
   constructor(private dishservice: DishService,
     private promotionservice: PromotionService,
     private leaderservice: LeaderService,
@@ -28,8 +29,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
      this.dishservice.getFeaturedDish().subscribe(dishservice => this.dish = dishservice,
       errmess=>this.dishErrMsg=<any>errmess);
-     this.promotionservice.getFeaturedPromotion().subscribe(promotion =>this.promotion = promotion);
-     this.leaderservice.getFeaturedleader().subscribe(leader =>this.leader = leader);
+     this.promotionservice.getFeaturedPromotion().subscribe(promotion =>this.promotion = promotion,
+      errmess=>this.proErrMsg=<any>errmess);
+     this.leaderservice.getFeaturedleader().subscribe(leader =>this.leader = leader,
+      errmess=>this.leadErrMsg=<any>errmess);
   }
 
 }

@@ -24,6 +24,7 @@ import {DishService} from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
 import {ProcessHTTPMsgService} from './services/process-httpmsg.service';
+import {FeedbackService} from './services/feedback.service';
 
 import 'hammerjs';
 import{baseURL} from './shared/baseurl';
@@ -36,6 +37,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { LoginComponent } from './login/login.component';
     ContactComponent,
     AboutComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ import { LoginComponent } from './login/login.component';
   providers: [DishService,
               PromotionService,
             LeaderService,
+            FeedbackService,
             ProcessHTTPMsgService,
             {provide: 'BaseURL', useValue: baseURL}
           ],

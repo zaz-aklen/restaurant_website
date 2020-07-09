@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Feedback, ContactType} from '../shared/Feedback';
+import {FeedbackService} from '../services/feedback.service';
+import { delay } from 'rxjs/Operators';
 
 @Component({
   selector: 'app-contact',
@@ -12,6 +14,10 @@ export class ContactComponent implements OnInit {
   feedbackForm: FormGroup;
   feedback: Feedback;
   contactType=ContactType;
+  ErrMess:string;
+  isDisplayed=false;
+  viewfeedback=true;
+  feedbackdisplay:Feedback;
   
   formErrors = {
     'firstname': '',
@@ -40,7 +46,7 @@ export class ContactComponent implements OnInit {
       'email':         'Email not in valid format.'
     },
   };
-  constructor(private fb:FormBuilder) {
+  constructor(private fb:FormBuilder,private feedbackservice: FeedbackService) {
     this.createForm();
    }
 
@@ -84,6 +90,19 @@ createForm(){
 onSubmit(){
   this.feedback=this.feedbackForm.value;
   console.log(this.feedback);
+  this.isDisplayed=true;
+  this.viewfeedback=true;
+  this.feedbackservice.submitFeedback(this.feedback).subscribe(feedback=>
+    {console.log("the post is successful",feedback);
+    this.feedbackdisplay=feedback;
+    console.log(this.feedbackdisplay);
+    this.viewfeedback=false;
+    setTimeout(() => {
+      this.isDisplayed=false;
+      this.viewfeedback=true;    
+    }, 5000);
+  },
+   errmess=>this.ErrMess=<any>errmess);
   this.feedbackForm.reset(
     {
       firstname: [''],
